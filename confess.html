@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>សារសម្ងាត់ 💗</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: "Noto Sans Khmer", "Khmer OS System", system-ui, sans-serif;
+}
+
+body {
+  overflow: hidden;
+  color: white;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.9) 0 2px, transparent 3px),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,.8) 0 2px, transparent 3px),
+    linear-gradient(135deg, #ffb6d9, #ff72b6 45%, #ff4f9a);
+}
+
+/* Animated background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .35;
+
+  background-image:
+    radial-gradient(circle, #fff 0 1px, transparent 2px);
+
+  background-size: 35px 35px;
+  animation: stars 8s linear infinite;
+}
+
+@keyframes stars {
+  to {
+    background-position: 70px 70px;
+  }
+}
+
+/* Main screen */
+.screen {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 22px;
+
+  transition: .6s ease;
+}
+
+/* Glass card */
+.card {
+  width: min(92vw, 520px);
+
+  padding: 28px 22px 24px;
+
+  text-align: center;
+
+  border: 1px solid rgba(255,255,255,.65);
+
+  background: rgba(255,255,255,.18);
+
+  backdrop-filter: blur(18px);
+
+  border-radius: 32px;
+
+  box-shadow:
+    0 25px 80px rgba(145,0,70,.3),
+    inset 0 1px 0 rgba(255,255,255,.55);
+
+  animation: cardIn .9s cubic-bezier(.2,1.5,.3,1);
+}
+
+@keyframes cardIn {
+  from {
+    transform: scale(.75) translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* Heart */
+.heart {
+  width: 105px;
+  height: 105px;
+
+  margin: 0 auto 15px;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 58px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.25);
+
+  box-shadow: 0 0 35px rgba(255,255,255,.7);
+
+  animation: heart 1.15s infinite;
+}
+
+@keyframes heart {
+  0%,100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.13);
+  }
+}
+
+/* Text */
+h1 {
+  font-size: clamp(27px,7vw,42px);
+
+  margin: 8px 0 12px;
+
+  text-shadow: 0 5px 18px #b50058;
+}
+
+p {
+  font-size: 18px;
+
+  line-height: 1.8;
+
+  margin: 10px 0;
+}
+
+/* Buttons area */
+.choice {
+  min-height: 190px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+}
+
+/* Buttons */
+button {
+  border: 0;
+
+  border-radius: 999px;
+
+  padding: 15px 24px;
+
+  margin: 8px;
+
+  font-size: 17px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  color: #d60069;
+
+  background: white;
+
+  box-shadow: 0 10px 25px rgba(110,0,50,.25);
+
+  transition:
+    transform .25s,
+    box-shadow .25s;
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.04);
+
+  box-shadow:
+    0 15px 35px rgba(110,0,50,.35);
+}
+
+button:active {
+  transform: scale(.94);
+}
+
+/* Yes */
+.yes {
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #ffe4f1
+  );
+}
+
+/* No */
+.no {
+  background: #ffebf5;
+
+  color: #ff3d91;
+}
+
+/* Small credit */
+.small {
+  font-size: 13px;
+
+  opacity: .85;
+
+  margin-top: 18px;
+}
+
+.small a {
+  color: white;
+
+  font-weight: 900;
+
+  text-decoration: none;
+}
+
+/* Final result */
+.hidden {
+  display: none !important;
+}
+
+.result {
+  position: fixed;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,255,255,.3),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #ff9dca,
+      #ff4c98
+    );
+
+  z-index: 20;
+
+  animation: fade .7s ease;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Cute final emoji */
+.cute {
+  font-size: 95px;
+
+  line-height: 1;
+
+  animation: bounce 1.2s infinite;
+
+  filter:
+    drop-shadow(
+      0 15px 20px rgba(100,0,50,.25)
+    );
+}
+
+@keyframes bounce {
+  0%,100% {
+    transform:
+      translateY(0)
+      rotate(-4deg);
+  }
+
+  50% {
+    transform:
+      translateY(-15px)
+      rotate(4deg);
+  }
+}
+
+/* Final text */
+.love-text {
+  font-size: clamp(29px,8vw,48px);
+
+  font-weight: 900;
+
+  text-shadow: 0 5px 18px #b0005d;
+}
+
+/* Floating hearts */
+.float {
+  position: fixed;
+
+  bottom: -50px;
+
+  font-size: 24px;
+
+  pointer-events: none;
+
+  z-index: 25;
+
+  animation:
+    floatUp linear forwards;
+}
+
+@keyframes floatUp {
+
+  0% {
+    transform:
+      translateY(0)
+      scale(.7)
+      rotate(0);
+
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translateY(-110vh)
+      scale(1.5)
+      rotate(35deg);
+
+    opacity: 0;
+  }
+}
+
+/* Shake */
+.shake {
+  animation: shake .35s;
+}
+
+@keyframes shake {
+
+  25% {
+    transform: translateX(-8px);
+  }
+
+  50% {
+    transform: translateX(8px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+/* Bottom credit */
+.credit {
+  position: fixed;
+
+  bottom: 12px;
+
+  left: 0;
+  right: 0;
+
+  text-align: center;
+
+  font-size: 13px;
+
+  z-index: 30;
+
+  color: rgba(255,255,255,.9);
+}
+
+.credit a {
+  color: white;
+
+  font-weight: 900;
+
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MAIN -->
+<div class="screen" id="main">
+
+  <div class="card" id="card">
+
+    <div class="heart">
+      💗
+    </div>
+
+    <h1 id="title">
+      មានអ្វីមួយចង់ប្រាប់... 🥹
+    </h1>
+
+    <p id="text">
+      សូមឆ្លើយតាមចិត្តពិតរបស់អ្នកណា។<br>
+      កុំខ្មាសអី 😳💗
+    </p>
+
+    <div class="choice" id="choice">
+
+      <button class="yes" onclick="next()">
+        ចង់ដឹង 💕
+      </button>
+
+    </div>
+
+    <div class="small">
+      Made with 💗 by
+      <a
+        href="https://t.me/mthuz"
+        target="_blank"
+      >
+        @mthuz
+      </a>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- FINAL -->
+<div id="result" class="result hidden">
+
+  <div>
+
+    <div class="cute">
+      🧸💗
+    </div>
+
+    <div class="love-text">
+      អូយយយ! ខ្ញុំដឹងថាអ្នកស្រឡាញ់ខ្ញុំ 😭💗
+    </div>
+
+    <p>
+      សូមរក្សាស្នាមញញឹមនេះទុកណា ✨🌸
+    </p>
+
+    <button onclick="location.reload()">
+      ចាប់ផ្ដើមម្ដងទៀត 🔄
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- CREDIT -->
+<div class="credit">
+
+  ©
+  <a
+    href="https://t.me/mthuz"
+    target="_blank"
+  >
+    t.me/mthuz
+  </a>
+
+</div>
+
+
+<script>
+
+/* =========================
+   QUESTIONS
+========================= */
+
+let step = 0;
+
+const questions = [
+
+  [
+    "សំណួរទី១ 😳",
+    "តើអ្នកគិតថាខ្លួនឯង cute ទេ? 🥹💗"
+  ],
+
+  [
+    "សំណួរទី២ 🌸",
+    "បើមានមនុស្សម្នាក់ចូលចិត្តអ្នក... អ្នកនឹងខ្មាសទេ? 😳"
+  ],
+
+  [
+    "សំណួរទី៣ 🫶",
+    "បើគេផ្ញើសារមកអ្នករាល់ថ្ងៃ... អ្នកនឹងសប្បាយចិត្តទេ? 💕"
+  ],
+
+  [
+    "សំណួរចុងក្រោយ 💗",
+    "តើអ្នក... ស្រឡាញ់ខ្ញុំទេ? 🥺"
+  ]
+
+];
+
+
+/* =========================
+   NEXT QUESTION
+========================= */
+
+function next() {
+
+  if (step < questions.length - 1) {
+
+    step++;
+
+    document.getElementById("title").textContent =
+      questions[step][0];
+
+    document.getElementById("text").innerHTML =
+      questions[step][1];
+
+
+    /* Final question */
+
+    if (step === questions.length - 1) {
+
+      document.getElementById("choice").innerHTML = `
+
+        <button
+          class="yes"
+          onclick="yesLove()"
+        >
+          បាទ/ចាស 💗
+        </button>
+
+        <button
+          class="no"
+          id="noBtn"
+          onclick="noLove()"
+        >
+          អត់ទេ 😭
+        </button>
+
+      `;
+
+    }
+
+    /* Normal question */
+
+    else {
+
+      document.getElementById("choice").innerHTML = `
+
+        <button
+          class="yes"
+          onclick="next()"
+        >
+          បាទ/ចាស 😳💗
+        </button>
+
+        <button
+          class="no"
+          onclick="next()"
+        >
+          អត់ទេ 🙈
+        </button>
+
+      `;
+
+    }
+
+    burst();
+
+  }
+
+}
+
+
+/* =========================
+   NO BUTTON
+   TELEPORT RANDOMLY
+========================= */
+
+function noLove() {
+
+  const btn =
+    document.getElementById("noBtn");
+
+
+  /* Fixed position lets it move
+     anywhere on the screen */
+
+  btn.style.position = "fixed";
+
+
+  /* Get button size */
+
+  const buttonWidth =
+    btn.offsetWidth;
+
+  const buttonHeight =
+    btn.offsetHeight;
+
+
+  /* Safe screen area */
+
+  const padding = 20;
+
+  const maxX =
+    window.innerWidth -
+    buttonWidth -
+    padding;
+
+  const maxY =
+    window.innerHeight -
+    buttonHeight -
+    padding;
+
+
+  /* Random position */
+
+  const x =
+    padding +
+    Math.random() *
+    Math.max(0, maxX - padding);
+
+
+  const y =
+    padding +
+    Math.random() *
+    Math.max(0, maxY - padding);
+
+
+  /* Move button */
+
+  btn.style.left =
+    x + "px";
+
+  btn.style.top =
+    y + "px";
+
+
+  /* Make sure it stays visible */
+
+  btn.style.margin = "0";
+
+
+  /* Funny message */
+
+  const messages = [
+
+    "អត់បានទេ 😭💗 សាក Yes មើល...",
+    "ហេ៎! កុំចុចខ្ញុំ 😭💕",
+    "ខ្ញុំរត់ហើយ 😂💗",
+    "ចាប់ខ្ញុំឱ្យបានសិន 😭",
+    "Yes នៅទីនោះណា 🥹💗",
+    "អត់ទេមិនអាចទេ 😭🌸"
+
+  ];
+
+
+  document.getElementById("text").innerHTML =
+    messages[
+      Math.floor(
+        Math.random() *
+        messages.length
+      )
+    ];
+
+
+  /* Shake */
+
+  const card =
+    document.getElementById("card");
+
+  card.classList.add("shake");
+
+  setTimeout(() => {
+
+    card.classList.remove("shake");
+
+  }, 350);
+
+
+  /* Hearts */
+
+  burst();
+
+}
+
+
+/* =========================
+   YES
+========================= */
+
+function yesLove() {
+
+  document.getElementById("main").style.opacity =
+    "0";
+
+
+  setTimeout(() => {
+
+    document
+      .getElementById("main")
+      .classList
+      .add("hidden");
+
+
+    document
+      .getElementById("result")
+      .classList
+      .remove("hidden");
+
+
+    /* Massive heart burst */
+
+    for (
+      let i = 0;
+      i < 50;
+      i++
+    ) {
+
+      setTimeout(
+        burst,
+        i * 55
+      );
+
+    }
+
+  }, 500);
+
+}
+
+
+/* =========================
+   FLOATING EFFECT
+========================= */
+
+function burst() {
+
+  const e =
+    document.createElement("div");
+
+
+  e.className =
+    "float";
+
+
+  const emojis = [
+
+    "💗",
+    "💕",
+    "💖",
+    "💘",
+    "🌸",
+    "✨",
+    "🩷",
+    "💞",
+    "🌷"
+
+  ];
+
+
+  e.textContent =
+    emojis[
+      Math.floor(
+        Math.random() *
+        emojis.length
+      )
+    ];
+
+
+  e.style.left =
+    Math.random() * 100 +
+    "vw";
+
+
+  e.style.animationDuration =
+    (3 + Math.random() * 4) +
+    "s";
+
+
+  e.style.fontSize =
+    (18 + Math.random() * 28) +
+    "px";
+
+
+  document.body.appendChild(e);
+
+
+  setTimeout(() => {
+
+    e.remove();
+
+  }, 7500);
+
+}
+
+
+/* Continuous background hearts */
+
+setInterval(() => {
+
+  const result =
+    document.getElementById("result");
+
+
+  if (
+    result.classList.contains("hidden")
+  ) {
+
+    if (
+      Math.random() > .35
+    ) {
+
+      burst();
+
+    }
+
+  }
+
+}, 600);
+
+</script>
+
+</body>
+</html>
